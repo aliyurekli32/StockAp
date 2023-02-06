@@ -110,3 +110,40 @@ class PurchasesSerializer(serializers.ModelSerializer):
         return datetime.datetime.strftime(obj.created, "%d,%m,%Y")     
     
 
+class SalesSerializer(serializers.ModelSerializer):
+    
+    user = serializers.StringRelatedField() 
+    brand = serializers.StringRelatedField()
+    product = serializers.StringRelatedField()
+    product_id = serializers.IntegerField()
+    brand_id = serializers.IntegerField()
+    # category = serializers.SerializerMethodField()
+    time_hour = serializers.SerializerMethodField()
+    created = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Sales
+        fields = (
+            "id",
+            "user",
+            "user_id",
+            # "category",
+            "brand",
+            "brand_id",
+            "product",
+            "product_id",
+            "quantity",
+            "price",
+            "price_total",
+            "time_hour",
+            "created",
+        )
+        
+    # def get_category(self, obj):
+    #     return obj.product.category.name
+    
+    def get_time_hour(self, obj):
+        return datetime.datetime.strftime(obj.created, "%H:%M")
+    
+    def get_created(self, obj):
+        return datetime.datetime.strftime(obj.created, "%d,%m,%Y")   
