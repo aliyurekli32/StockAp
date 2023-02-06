@@ -12,9 +12,23 @@ class CategorySerializer(serializers.ModelSerializer):
         return Product.objects.filter(category_id=obj.id).count()
     
 class ProductSerializer(serializers.ModelSerializer):
+    category = serializers.StringRelatedField()
+    brand = serializers.StringRelatedField()
+    brand_id = serializers.IntegerField()
+    category_id = serializers.IntegerField()
+    
     class Meta:
         model = Product
-        fields = "__all__"
+        fields = (
+            "id",
+            "name",
+            "category",
+            "category_id",
+            "brand",
+            "brand_id",
+            "stock",
+        )
+        read_only_fields = ("stock",)
     
 class CategoryProductSerializer(serializers.ModelSerializer):
     c_products = ProductSerializer(many=True)
