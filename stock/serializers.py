@@ -48,3 +48,15 @@ class BrandSerializer(serializers.ModelSerializer):
             "name",
             "image"
         )
+
+class FirmSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Firm
+        fields = (
+            'id',
+            'name',
+            'phone',
+            'image',
+            'address'
+        )
+        
