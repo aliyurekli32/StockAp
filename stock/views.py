@@ -168,7 +168,7 @@ class SalesView(viewsets.ModelViewSet):
         product= Product.objects.get(id=instance.product_id) 
         
         sonuc = sale["quantity"] - instance.quantity
-        if sonuc <= 0:
+        if ((product.stock-sale["quantity"]) >= 0):
             product.stock -= sonuc
             product.save()
         else:
